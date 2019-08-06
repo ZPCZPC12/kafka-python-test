@@ -1,0 +1,27 @@
+<h1>Kafka and Spark - Locally running Instance</h1>
+<ol>
+<li>Start Zookeeper Server</li>
+</ol>
+<pre><code>C:\kafkaTest\kafka_2.12-2.2.0&gt; bin\windows\zookeeper-server-start.bat config/zookeeper.properties
+</code></pre>
+<ol start="2">
+<li>Start Kafka Server in separate Powershell terminal</li>
+</ol>
+<pre><code>C:\kafkaTest\kafka_2.12-2.2.0&gt; bin\windows\kafka-server-start.bat config/server.properties
+</code></pre>
+<ol start="3">
+<li>Run Datasim script in separate Powershell terminal (Ensure that all python depencies have been installed with Pip)</li>
+</ol>
+<pre><code>C:\kafkaTest&gt; python .\datasim.py
+</code></pre>
+<ol start="4">
+<li>Run Consumer script (assuming topic is "test") in separate Powershell terminal</li>
+</ol>
+<pre><code>C:\kafkaTest\kafka_2.12-2.2.0&gt; bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
+</code></pre>
+<ol start="5">
+<li>Run Spark script in separate Powershell terminal</li>
+</ol>
+<pre><code>C:\kafkaTest\spark-2.4.3-bin-hadoop2.7&gt; bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.2.0 ./spark-k
+afka.py localhost:9092 test
+</code></pre>
